@@ -4,7 +4,7 @@ python:
 
 env:
   COMMIT: ${TRAVIS_COMMIT::8}
-  MAIN_REPO: https://github.com/yeeeshiuan/client.git
+  MAIN_REPO: https://github.com/yeeeshiuan/service.git
 
 install:
   - cd service
