@@ -1,0 +1,7 @@
+runtime: python36
+
+entrypoint: gunicorn -b 0.0.0.0:5000 manage:app
+
+handlers:
+- url: /.*
+  script: auto

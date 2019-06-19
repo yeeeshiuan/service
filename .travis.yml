@@ -1,20 +1,25 @@
 language: python
 python:
-  - "3.6"
+    - "3.6"
 
 env:
   COMMIT: ${TRAVIS_COMMIT::8}
   MAIN_REPO: https://github.com/yeeeshiuan/service.git
 
-install:
-  - cd service
-  - pip install -r requirements.txt
+before_install:
 
-before_script:
-  - export FLASK_ENV=development
-  - export APP_SETTINGS=project.config.DevelopmentConfig
-  - export SECRET_KEY=my_precious
-  - export FLASK_APP=project
+    - export FLASK_ENV=development
+    - export APP_SETTINGS=project.config.DevelopmentConfig
+    - export SECRET_KEY=my_precious
+    - export FLASK_APP=project
+
+install:
+    - cd service
+    - pip install -r requirements.txt
+
+install:
+
 
 script:
-  - python manage.py cov
+    - python manage.py cov
+
