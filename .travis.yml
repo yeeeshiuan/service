@@ -7,6 +7,15 @@ env:
   MAIN_REPO: https://github.com/yeeeshiuan/service.git
 
 before_install:
+    # [START auth]
+    # Decrypt the credentials we added to the repo using the key we added with the Travis command line tool
+    - openssl aes-256-cbc -K $encrypted_dbd77db57cd9_key -iv $encrypted_dbd77db57cd9_iv -in credentials.tar.gz.enc -out credentials.tar.gz -d
+
+    - tar -xzf credentials.tar.gz
+    - mkdir -p lib
+    # Here we use the decrypted service account credentials to authenticate the command line tool
+    - gcloud auth activate-service-account --key-file client-secret.json
+    # [END auth]
 
     - export FLASK_ENV=development
     - export APP_SETTINGS=project.config.DevelopmentConfig
@@ -14,12 +23,13 @@ before_install:
     - export FLASK_APP=project
 
 install:
+    # Set the correct project to deploy
+    - gcloud config set project $googleAppId
     - cd service
     - pip install -r requirements.txt
-
-install:
 
 
 script:
     - python manage.py cov
-
+    # Deploy the app
+    - gcloud -q app deploy app.yaml --promote
