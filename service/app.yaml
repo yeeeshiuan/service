@@ -1,6 +1,6 @@
-runtime: python36
+runtime: python37
 
-entrypoint: gunicorn -b 0.0.0.0:5000 manage:app
+entrypoint: gunicorn -b :8080 manage:app
 
 handlers:
 - url: /.*

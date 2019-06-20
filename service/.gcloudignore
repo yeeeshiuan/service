@@ -15,5 +15,8 @@
 
 # Python pycache:
 __pycache__/
+htmlcov/
+env/
+
 # Ignored by the build system
 /setup.cfg
