@@ -32,4 +32,4 @@ install:
 script:
     - python manage.py cov
     # Deploy the app
-    - gcloud -q app deploy app.yaml --promote
+    - gcloud app deploy app.yaml --project backend-244012
