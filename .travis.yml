@@ -10,7 +10,6 @@ before_install:
     # [START auth]
     # Decrypt the credentials we added to the repo using the key we added with the Travis command line tool
     - openssl aes-256-cbc -K $encrypted_dbd77db57cd9_key -iv $encrypted_dbd77db57cd9_iv -in credentials.tar.gz.enc -out credentials.tar.gz -d
-
     - tar -xzf credentials.tar.gz
     - mkdir -p lib
     # Here we use the decrypted service account credentials to authenticate the command line tool
@@ -32,4 +31,4 @@ install:
 script:
     - python manage.py cov
     # Deploy the app
-    - gcloud -q app deploy app.yaml --project backend-244012
+    - gcloud -q app deploy app.yaml --promote
