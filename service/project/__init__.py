@@ -6,6 +6,9 @@ import os
 from flask import Flask
 from flask_cors import CORS
 
+# global variable
+apiDict = {"thermalPowerGenerationCO2": "https://quality.data.gov.tw/dq_download_json.php?nid=29947&md5_url=9ddc3290bbec618eadd9f53869acf542", 
+           "error": "http://www.google.com/5566"}
 
 # instantiate the extensions
 
