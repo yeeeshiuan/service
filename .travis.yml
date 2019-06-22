@@ -31,4 +31,5 @@ install:
 script:
     - python manage.py cov
     # Deploy the app
+    - gcloud components update
     - gcloud -q app deploy app.yaml --promote --verbosity=debug
