@@ -39,7 +39,7 @@ def api(key):
         message = "Resource problem."
 
         if res.status_code == 200:
-            res.encoding = 'utf-8'
+            res.encoding = 'utf-8-sig'
             f = StringIO(res.text)
             reader = csv.DictReader(f, delimiter=',')
             message = json.dumps( [ row for row in reader ] )
@@ -77,7 +77,7 @@ def normalAPI():
 
     if res.status_code == 200:
         if url[-3:] == "csv":
-            res.encoding = 'utf-8'
+            res.encoding = 'utf-8-sig'
             f = StringIO(res.text)
             reader = csv.DictReader(f, delimiter=',')
             message = json.dumps( [ row for row in reader ] )
