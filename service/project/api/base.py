@@ -4,6 +4,8 @@
 from flask import Blueprint, jsonify, request
 import requests, json, csv, sys
 
+from io import StringIO
+
 from project import apiDict
 from project.api.utils import authenticate
 
@@ -37,8 +39,9 @@ def api(key):
         message = "Resource problem."
 
         if res.status_code == 200:
-            text=res.iter_lines(decode_unicode='utf-8')
-            reader=csv.reader(text,delimiter=',')
+            res.encoding = 'utf-8'
+            f = StringIO(res.text)
+            reader = csv.DictReader(f, delimiter=',')
             message = json.dumps( [ row for row in reader ] )
         else:
             status = "fail"
@@ -74,8 +77,9 @@ def normalAPI():
 
     if res.status_code == 200:
         if url[-3:] == "csv":
-            text=res.iter_lines(decode_unicode='utf-8')
-            reader=csv.reader(text,delimiter=',')
+            res.encoding = 'utf-8'
+            f = StringIO(res.text)
+            reader = csv.DictReader(f, delimiter=',')
             message = json.dumps( [ row for row in reader ] )
         else:
             try:
